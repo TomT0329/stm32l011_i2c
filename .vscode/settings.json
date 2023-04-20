@@ -1,0 +1,20 @@
+{
+    "files.associations": {
+        "rcc.h": "c",
+        "gpio.h": "c",
+        "gpio_common_f24.h": "c",
+        "memorymap.h": "c",
+        "stdbool.h": "c",
+        "stdint.h": "c",
+        "pwr.h": "c",
+        "common.h": "c",
+        "errno.h": "c",
+        "usart.h": "c",
+        "i2c.h": "c",
+        "timer.h": "c",
+        "flash.h": "c",
+        "assert.h": "c",
+        "usart_common_all.h": "c",
+        "main.h": "c"
+    }
+}
