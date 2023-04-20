@@ -15,6 +15,7 @@
         "flash.h": "c",
         "assert.h": "c",
         "usart_common_all.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "limits": "c"
     }
 }

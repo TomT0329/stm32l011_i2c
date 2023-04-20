@@ -21,7 +21,7 @@
 
 #include <main.h>
 
-
+/*Gobal parameters for debugging*/
 int count = 0;
 uint8_t cmd;
 
@@ -142,10 +142,11 @@ static void usart_setup(void)
 
 
 
-/*The first three file descriptors, 0, 1, and 2, are reserved
-for standard input, standard output, and standard error, respectively.*/
+/*Replace the weak fun "printf"*/
 int _write(int file, char *ptr, int len)
 {
+  /*The first three file descriptors, 0, 1, and 2, are reserved
+  for standard input, standard output, and standard error, respectively.*/
   int i;
 
   if (file == 1)
@@ -157,10 +158,10 @@ int _write(int file, char *ptr, int len)
     return i;
   }
 
-/*errno is a gobal variable which is defined to report
-errors that occur during the execution of certain library functions.
-EI0->input/output error
-*/
+  /*errno is a gobal variable which is defined to report
+  errors that occur during the execution of certain library functions.
+  EI0->input/output error
+  */
   errno = EIO;
   return -1;
 }
@@ -178,18 +179,18 @@ int main(void)
   return 0;
 }
 
-// /**
-//  * @brief Timer2 Interrupt service routine.
-//  */
-// void tim2_isr(void)
-// {
-//   if (timer_get_flag(TIM2, TIM_SR_UIF)) /* Check 'Update interrupt flag'. */
-//   {
-//     timer_clear_flag(TIM2, TIM_SR_UIF);
-//     gpio_toggle(LEDPORT, LEDPIN); /* LED on/off. */
-//     printf("Hello World! %i\r\n", count++);
-//   }
-// }
+/**
+ * @brief Timer2 Interrupt service routine.
+ */
+void tim2_isr(void)
+{
+  if (timer_get_flag(TIM2, TIM_SR_UIF)) /* Check 'Update interrupt flag'. */
+  {
+    timer_clear_flag(TIM2, TIM_SR_UIF);
+    gpio_toggle(LEDPORT, LEDPIN); /* LED on/off. */
+    printf("Hello World! %i\r\n", count++);
+  }
+}
 
 /**
  * @brief USART2 Interrupt service routine.
@@ -243,9 +244,8 @@ void usart2_isr(void)
   {
     usart_send_blocking(USART2, 0xFF); 
   }
+
   usart_enable_rx_interrupt(USART2);
-
-
 
   USART_ISR(USART2) &= ~USART_ISR_RXNE; /* Clear 'Read data register not empty' flag. */
 }
